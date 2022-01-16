@@ -95,4 +95,13 @@ dependencies {
     // Image Cropper Library
     implementation 'com.theartofdev.edmodo:android-image-cropper:2.8.0'
 
+
+    implementation 'com.google.android.gms:play-services-maps:18.0.2'
+    implementation 'com.google.android.gms:play-services-location:19.0.1'
+
+    // Utils
+    implementation 'com.google.maps.android:android-maps-utils:2.2.0'
+
+
+
 }

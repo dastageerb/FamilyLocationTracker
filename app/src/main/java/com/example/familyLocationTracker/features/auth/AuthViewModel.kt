@@ -1,17 +1,14 @@
-package com.example.familyLocationTracker.auth
+package com.example.familyLocationTracker.features.auth
 
 import android.app.Activity
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.familyLocationTracker.auth.model.VerificationEntity
+import com.example.familyLocationTracker.features.auth.model.VerificationEntity
 import com.example.familyLocationTracker.util.NetworkResponse
-import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.*
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import java.util.concurrent.TimeUnit

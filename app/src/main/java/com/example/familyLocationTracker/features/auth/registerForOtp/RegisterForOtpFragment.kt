@@ -1,16 +1,14 @@
-package com.example.familyLocationTracker.auth.registerForOtp
+package com.example.familyLocationTracker.features.auth.registerForOtp
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.familyLocationTracker.R
-import com.example.familyLocationTracker.auth.AuthViewModel
-import com.example.familyLocationTracker.auth.model.VerificationEntity
+import com.example.familyLocationTracker.features.auth.AuthViewModel
+import com.example.familyLocationTracker.features.auth.model.VerificationEntity
 import com.example.familyLocationTracker.base.BaseFragment
 import com.example.familyLocationTracker.databinding.FragmentRegisterForOtpBinding
 import com.example.familyLocationTracker.util.NetworkResponse
@@ -18,7 +16,6 @@ import com.example.familyLocationTracker.util.extensionFunctions.ContextExtensio
 import com.example.familyLocationTracker.util.extensionFunctions.ExtensionFunctions.hide
 import com.example.familyLocationTracker.util.extensionFunctions.ExtensionFunctions.show
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.ktx.Firebase
 
 
 class RegisterForOtpFragment : BaseFragment<FragmentRegisterForOtpBinding>() , View.OnClickListener
@@ -47,7 +44,8 @@ class RegisterForOtpFragment : BaseFragment<FragmentRegisterForOtpBinding>() , V
 
         if(FirebaseAuth.getInstance().currentUser != null)
         {
-            findNavController().setGraph(R.navigation.requirement_setup_nav)
+            findNavController().setGraph(R.navigation.setup_profile_fragment)
+         //   findNavController().setGraph(R.navigation.requirement_setup_nav)
         }
 
 

@@ -14,6 +14,9 @@
     <string name="enter_the_otp_sent_to">Enter the Otp sent to</string>
     <string name="verify">Verify</string>
     <string name="example_number">+923073258880</string>
+    <string name="name">Name</string>
+    <string name="address">Address</string>
+    <string name="get_current_location">Get current Location</string>
 
 
 </resources>

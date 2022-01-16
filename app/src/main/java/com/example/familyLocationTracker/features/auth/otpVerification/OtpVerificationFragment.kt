@@ -1,4 +1,4 @@
-package com.example.familyLocationTracker.auth.otpVerification
+package com.example.familyLocationTracker.features.auth.otpVerification
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.familyLocationTracker.R
-import com.example.familyLocationTracker.auth.AuthViewModel
+import com.example.familyLocationTracker.features.auth.AuthViewModel
 import com.example.familyLocationTracker.base.BaseFragment
 import com.example.familyLocationTracker.databinding.FragmentOtpVerificationBinding
 import com.example.familyLocationTracker.util.NetworkResponse
