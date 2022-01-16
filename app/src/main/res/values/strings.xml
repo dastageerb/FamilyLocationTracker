@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">FamilyLocationTracker</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="register">Register</string>
+    <string name="otp_verification">Otp Verification</string>
+    <string name="send_otp">Send OTP</string>
+    <string name="number">Number</string>
+
+
+    <string name="google_maps_api_key">
+    AIzaSyAFK7yIIESWj7iBZmeScadozXkGHHWM4J8</string>
+    <string name="opt_verification">OPT Verification</string>
+    <string name="enter_the_otp_sent_to">Enter the Otp sent to</string>
+    <string name="verify">Verify</string>
+    <string name="example_number">+923073258880</string>
+
+
+</resources>

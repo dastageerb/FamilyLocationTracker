@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/auth_nav"
+    app:startDestination="@id/registerForOtpFragment">
+
+    <fragment
+        android:id="@+id/registerForOtpFragment"
+        android:name="com.example.familyLocationTracker.auth.registerForOtp.RegisterForOtpFragment"
+        android:label="@string/register"
+        tools:layout="@layout/fragment_register_for_otp" >
+        <action
+            android:id="@+id/action_registerForOtpFragment_to_otpVerificationFragment"
+            app:destination="@id/otpVerificationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/otpVerificationFragment"
+        android:name="com.example.familyLocationTracker.auth.otpVerification.OtpVerificationFragment"
+        android:label="@string/otp_verification"
+        tools:layout="@layout/fragment_otp_verification" />
+</navigation>

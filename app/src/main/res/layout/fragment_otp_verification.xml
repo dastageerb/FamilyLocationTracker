@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".auth.otpVerification.OtpVerificationFragment"
+    android:orientation="vertical"
+    android:gravity="center"
+    >
+
+
+
+
+    <ImageView
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:src="@drawable/ic_baseline_domain_verification_24"
+        app:tint="@color/colorPrimary" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:text="@string/opt_verification"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:text="@string/enter_the_otp_sent_to"
+        android:textColor="@color/black"
+        android:layout_marginTop="8dp"
+        />
+
+
+    <TextView
+        android:id="@+id/fragmentOtpVerificationNumberTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:text="@string/example_number"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:layout_marginTop="8dp"
+        />
+
+    <com.chaos.view.PinView
+        android:id="@+id/fragmentOtpVerificationPinViewEditText"
+        style="@style/PinWidget.PinView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:cursorVisible="true"
+        android:inputType="number"
+        app:cursorColor="@color/colorPrimaryDark"
+        app:itemCount="6"
+        app:itemHeight="50dp"
+        app:itemRadius="6dp"
+        app:itemWidth="50dp"
+        app:lineColor="@color/purple_200"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/fragmentOtpVerificationVerifyButton"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:background="@drawable/button_bg"
+        android:text="@string/verify"
+        android:textColor="@color/white"
+        android:layout_marginTop="36dp"
+        />
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/fragmentOtpVerificationFragmentProgressBar"
+        android:layout_marginTop="16dp"
+        android:visibility="gone"
+
+        />
+
+</LinearLayout>
