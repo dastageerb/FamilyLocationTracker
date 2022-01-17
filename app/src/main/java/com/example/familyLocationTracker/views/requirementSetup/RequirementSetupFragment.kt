@@ -1,4 +1,4 @@
-package com.example.familyLocationTracker.features.requirementSetup
+package com.example.familyLocationTracker.views.requirementSetup
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

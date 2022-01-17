@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/requirementSetupFragment"
-        android:name="com.example.familyLocationTracker.features.requirementSetup.RequirementSetupFragment"
+        android:name="com.example.familyLocationTracker.views.requirementSetup.RequirementSetupFragment"
         android:label="fragment_requirement_setup"
         tools:layout="@layout/fragment_requirement_setup" />
 </navigation>

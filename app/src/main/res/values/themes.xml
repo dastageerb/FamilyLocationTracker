@@ -21,6 +21,7 @@
         <item name="boxBackgroundColor">@color/colorTransparent</item>
     </style>
 
+    <style name="toolbar" parent="Theme.MaterialComponents.DayNight.DarkActionBar" />
 
 
 </resources>

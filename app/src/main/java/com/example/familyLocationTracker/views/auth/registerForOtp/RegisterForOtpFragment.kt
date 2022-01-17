@@ -1,4 +1,4 @@
-package com.example.familyLocationTracker.features.auth.registerForOtp
+package com.example.familyLocationTracker.views.auth.registerForOtp
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,11 +7,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.familyLocationTracker.R
-import com.example.familyLocationTracker.features.auth.AuthViewModel
-import com.example.familyLocationTracker.features.auth.model.VerificationEntity
+import com.example.familyLocationTracker.views.auth.AuthViewModel
+import com.example.familyLocationTracker.models.VerificationEntity
 import com.example.familyLocationTracker.base.BaseFragment
 import com.example.familyLocationTracker.databinding.FragmentRegisterForOtpBinding
 import com.example.familyLocationTracker.util.NetworkResponse
+import com.example.familyLocationTracker.util.extensionFunctions.ContextExtension.gpsEnabled
+import com.example.familyLocationTracker.util.extensionFunctions.ContextExtension.locationPermissionsGranted
 import com.example.familyLocationTracker.util.extensionFunctions.ContextExtension.showToast
 import com.example.familyLocationTracker.util.extensionFunctions.ExtensionFunctions.hide
 import com.example.familyLocationTracker.util.extensionFunctions.ExtensionFunctions.show
@@ -44,8 +46,17 @@ class RegisterForOtpFragment : BaseFragment<FragmentRegisterForOtpBinding>() , V
 
         if(FirebaseAuth.getInstance().currentUser != null)
         {
-            findNavController().setGraph(R.navigation.setup_profile_fragment)
-         //   findNavController().setGraph(R.navigation.requirement_setup_nav)
+            findNavController().setGraph(R.navigation.setup_profile_nav)
+
+            if(!requireContext().locationPermissionsGranted() || !requireContext().gpsEnabled())
+            {
+                findNavController().setGraph(R.navigation.requirement_setup_nav)
+            }else
+            {
+                findNavController().setGraph(R.navigation.base_app_nav)
+            }
+
+
         }
 
 

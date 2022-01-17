@@ -9,11 +9,13 @@ import android.location.Geocoder
 import android.location.LocationManager
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
+import android.net.Uri
 import android.provider.Settings
 import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import com.example.familyLocationTracker.util.Constants
 import com.google.android.gms.maps.model.LatLng
 import java.lang.Exception
 import java.util.*
@@ -85,6 +87,18 @@ object ContextExtension
 
     } // checkIfPermissionsGiven
 
+
+
+
+     fun Context.permissionDenied(msg:String)
+    {
+        this.showToast(msg)
+        this.startActivity(
+            Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply ()
+            {
+                data = Uri.fromParts("package", Constants.APP_PACKAGE_NAME, null)
+            })
+    }// permissionDenied
 
 
     fun Context.hasStoragePermission():Boolean

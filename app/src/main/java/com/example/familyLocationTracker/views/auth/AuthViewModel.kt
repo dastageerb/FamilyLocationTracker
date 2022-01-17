@@ -1,14 +1,16 @@
-package com.example.familyLocationTracker.features.auth
+package com.example.familyLocationTracker.views.auth
 
 import android.app.Activity
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.familyLocationTracker.features.auth.model.VerificationEntity
+import com.example.familyLocationTracker.models.VerificationEntity
+import com.example.familyLocationTracker.util.Constants
 import com.example.familyLocationTracker.util.NetworkResponse
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.*
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import java.util.concurrent.TimeUnit
@@ -17,10 +19,11 @@ class AuthViewModel : ViewModel()
 {
 
     private var firebaseAuth: FirebaseAuth?=null
-
+    private var firebaseFireStore:FirebaseFirestore?=null
     init
     {
         firebaseAuth = FirebaseAuth.getInstance()
+        firebaseFireStore = FirebaseFirestore.getInstance()
     }
 
     /**   Sending Otp  */
@@ -58,21 +61,35 @@ class AuthViewModel : ViewModel()
     } // sendFirebaseOtp
 
 
+    // This will verify the OTP and check if user already exists or not
+
+    val _userVerificationResponse:MutableLiveData<NetworkResponse<Boolean>> = MutableLiveData()
+    val userVerificationResponse:LiveData<NetworkResponse<Boolean>> = _userVerificationResponse
+
     fun verifyUser(verificationId: String?, otpCode: String) = viewModelScope.launch ()
     {
 
-        _userOtpResponse.value = NetworkResponse.Loading()
+        _userVerificationResponse.value = NetworkResponse.Loading()
         try
         {
             val authCredential = PhoneAuthProvider.getCredential(verificationId!!, otpCode)
             val user = firebaseAuth?.signInWithCredential(authCredential)?.await()?.user
             if ( user!= null)
             {
-                _userOtpResponse.value = NetworkResponse.Success("Logged In Successfully")
-            }
+                // check if user is new or exists already
+                val user = firebaseFireStore?.collection(Constants.USER_COLLECTION)
+                    ?.document(firebaseAuth?.currentUser?.phoneNumber!!)?.get()?.await()
+                if(user!!.exists())
+                {
+                    _userVerificationResponse.value = NetworkResponse.Success(true)
+                }else
+                {
+                    _userVerificationResponse.value = NetworkResponse.Success(false)
+                } // else closed
+            } // if closed
         }catch (e:Exception)
         {
-            _userOtpResponse.value = NetworkResponse.Error(e.message)
+            _userVerificationResponse.value = NetworkResponse.Error(e.message)
         } // catch closed
     } // verifyUser closed
 

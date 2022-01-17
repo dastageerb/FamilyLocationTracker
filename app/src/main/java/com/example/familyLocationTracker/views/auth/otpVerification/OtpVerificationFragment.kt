@@ -1,4 +1,4 @@
-package com.example.familyLocationTracker.features.auth.otpVerification
+package com.example.familyLocationTracker.views.auth.otpVerification
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.familyLocationTracker.R
-import com.example.familyLocationTracker.features.auth.AuthViewModel
+import com.example.familyLocationTracker.views.auth.AuthViewModel
 import com.example.familyLocationTracker.base.BaseFragment
 import com.example.familyLocationTracker.databinding.FragmentOtpVerificationBinding
 import com.example.familyLocationTracker.util.NetworkResponse
@@ -65,7 +65,7 @@ class OtpVerificationFragment : BaseFragment<FragmentOtpVerificationBinding>() ,
         val otpCode = binding.fragmentOtpVerificationPinViewEditText.text.toString()
         viewModel.verifyUser(verificationId,otpCode)
 
-        viewModel.userOtpResponse.observe(viewLifecycleOwner)
+        viewModel.userVerificationResponse.observe(viewLifecycleOwner)
         {
             when(it)
             {
@@ -81,11 +81,14 @@ class OtpVerificationFragment : BaseFragment<FragmentOtpVerificationBinding>() ,
                 is NetworkResponse.Success ->
                 {
                     binding.fragmentOtpVerificationFragmentProgressBar.hide()
-                    requireContext().showToast(it.data!!)
+                    if(it.data!!)
+                    {
+                        findNavController().setGraph(R.navigation.base_app_nav)
+                    }else
+                    {
+                        findNavController().setGraph(R.navigation.requirement_setup_nav)
+                    }
 
-
-
-                    findNavController().setGraph(R.navigation.requirement_setup_nav)
                 } // success closed
             } // when closed
         } // viewLifeCycleOwner

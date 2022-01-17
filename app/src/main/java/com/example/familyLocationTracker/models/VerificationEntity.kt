@@ -1,3 +1,3 @@
-package com.example.familyLocationTracker.features.auth.model
+package com.example.familyLocationTracker.models
 
 data class VerificationEntity(var verificationId:String,var number:String)

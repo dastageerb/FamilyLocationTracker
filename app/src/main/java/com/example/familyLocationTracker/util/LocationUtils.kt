@@ -33,7 +33,7 @@ object LocationUtils
             if (addresses.size > 0)
             {
                 return addresses[0]
-                    .getAddressLine(0) // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
+                    .locality // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
             }
         }
         catch (e: Exception)
