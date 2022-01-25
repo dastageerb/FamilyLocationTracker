@@ -12,31 +12,25 @@ import com.squareup.picasso.Picasso
 object PicassoExtensions
 {
 
-    fun Context.showToast(msg:String) = Toast.makeText(this,msg,Toast.LENGTH_SHORT).show()
 
-
-
-
-
-
-
-
-    fun ImageView.load(url:String?)
-    {
-        if(url!!.isNotEmpty())
-        {
-            Picasso.get().load(url).into(this)
-        }
-    }
-
-
-    fun ImageView.load(url: String?, placeHolder: Int)
-    {
-        if(url!!.isNotEmpty())
-        {
-            Picasso.get().load(url).placeholder(placeHolder).into(this)
-        }
-    }
+//
+//
+//    fun ImageView.load(url:String?)
+//    {
+//        if(url!!.isNotEmpty())
+//        {
+//            Picasso.get().load(url).into(this)
+//        }
+//    }
+//
+//
+//    fun ImageView.load(url: String?, placeHolder: Int)
+//    {
+//        if(url!!.isNotEmpty())
+//        {
+//            Picasso.get().load(url).placeholder(placeHolder).into(this)
+//        }
+//    }
 
 
 

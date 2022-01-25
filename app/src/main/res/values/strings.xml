@@ -18,6 +18,16 @@
     <string name="address">Address</string>
     <string name="get_current_location">Get current Location</string>
     <string name="setup_profile">Setup Profile</string>
+    <string name="user_name">User Name</string>
+    <string name="city">City</string>
+    <string name="home">Home</string>
+    <string name="map">Map</string>
+    <string name="requests">Requests</string>
+    <string name="profile">Profile</string>
+    <string name="search_users">Search Users</string>
+    <string name="user_profile">User Profile</string>
+    <string name="search">Search</string>
+    <string name="people_you_may_know">People You May Know</string>
 
 
 </resources>

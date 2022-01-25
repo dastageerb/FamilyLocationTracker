@@ -1,9 +1,9 @@
 package com.example.familyLocationTracker.models
 
 data class User(
-    val userName:String
-    ,val userContact:String
-    ,val userCity:String
-    ,val userImageUrl:String
-    ,val userLocation: UserLocation
+    val userName:String?=null
+    ,val userContact:String?=null
+    ,val userCity:String?=null
+    ,val userImageUrl:String?=null
+    ,val userLocation: UserLocation?=null
 )

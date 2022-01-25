@@ -13,6 +13,7 @@ import androidx.core.app.ActivityCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import coil.load
 import com.example.familyLocationTracker.R
 import com.example.familyLocationTracker.base.BaseFragment
 import com.example.familyLocationTracker.databinding.FragmentSetupProfileBinding
@@ -31,7 +32,6 @@ import com.example.familyLocationTracker.util.extensionFunctions.ExtensionFuncti
 import com.example.familyLocationTracker.util.extensionFunctions.ExtensionFunctions.enable
 import com.example.familyLocationTracker.util.extensionFunctions.ExtensionFunctions.hide
 import com.example.familyLocationTracker.util.extensionFunctions.ExtensionFunctions.show
-import com.example.familyLocationTracker.util.extensionFunctions.PicassoExtensions.load
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback

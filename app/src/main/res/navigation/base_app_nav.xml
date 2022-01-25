@@ -7,7 +7,40 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.familyLocationTracker.views.HomeFragment"
-        android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        android:name="com.example.familyLocationTracker.views.home.HomeFragment"
+        android:label="@string/home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_searchUsersFragment"
+            app:destination="@id/searchUsersFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/familyMapFragment"
+        android:name="com.example.familyLocationTracker.views.map.FamilyMapFragment"
+        android:label="@string/map"
+        tools:layout="@layout/fragment_family_map" />
+    <fragment
+        android:id="@+id/friendRequestsFragment"
+        android:name="com.example.familyLocationTracker.views.friendRequests.FriendRequestsFragment"
+        android:label="@string/requests"
+        tools:layout="@layout/fragment_friend_requests" />
+    <fragment
+        android:id="@+id/searchUsersFragment"
+        android:name="com.example.familyLocationTracker.views.searchUsers.SearchUsersFragment"
+        android:label="@string/search_users"
+        tools:layout="@layout/fragment_search_users" >
+        <action
+            android:id="@+id/action_searchUsersFragment_to_userProfileFragment"
+            app:destination="@id/userProfileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/userProfileFragment"
+        android:name="com.example.familyLocationTracker.views.userProfile.UserProfileFragment"
+        android:label="@string/user_profile"
+        tools:layout="@layout/fragment_user_profile" />
+    <fragment
+        android:id="@+id/ownProfileFragment"
+        android:name="com.example.familyLocationTracker.views.ownProfile.OwnProfileFragment"
+        android:label="fragment_own_profile"
+        tools:layout="@layout/fragment_own_profile" />
 </navigation>
