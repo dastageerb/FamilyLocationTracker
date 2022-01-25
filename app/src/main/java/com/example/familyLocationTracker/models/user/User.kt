@@ -1,4 +1,4 @@
-package com.example.familyLocationTracker.models
+package com.example.familyLocationTracker.models.user
 
 data class User(
     val userName:String?=null

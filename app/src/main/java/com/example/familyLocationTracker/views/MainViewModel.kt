@@ -4,12 +4,15 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.familyLocationTracker.models.User
+import com.example.familyLocationTracker.models.request.Request
+import com.example.familyLocationTracker.models.user.User
 import com.example.familyLocationTracker.util.Constants
 import com.example.familyLocationTracker.util.NetworkResponse
+import com.example.familyLocationTracker.util.RequestState
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
 import java.lang.Exception
 
 class MainViewModel:ViewModel()
@@ -59,15 +62,91 @@ class MainViewModel:ViewModel()
         {
             _getUsersResponse.value = NetworkResponse.Error(e.message)
         }
-
-
-
     } // getAllUsers closed
 
 
 
+
+
+
+
+    /*** GET User Request State ***/
+
+    private val _requestState :MutableLiveData<NetworkResponse<RequestState>> = MutableLiveData();
+    val requestState:LiveData<NetworkResponse<RequestState>> = _requestState
+
+
+
+
+    fun sendRequest(userContact: String) = viewModelScope.launch()
+    {
+
+        /// userContact acts as user Id
+
+        _requestState.value = NetworkResponse.Loading()
+        try
+        {
+
+            val userCollection = firebaseFirestore
+                ?.collection(Constants.REQUESTS_COLLECTION)
+                ?.document(userContact)
+                ?.collection(Constants.RECEIVED_COLLECTION)
+                ?.document(firebaseAuth?.currentUser?.phoneNumber!!)?.set(Request("received"))?.await()
+
+            val myDb = firebaseFirestore
+                ?.collection(Constants.REQUESTS_COLLECTION)
+                ?.document(firebaseAuth?.currentUser?.phoneNumber!!)
+                ?.collection(Constants.SENT_COLLECTION)
+                ?.document(userContact)?.set(Request("sent"))?.await()
+
+            _requestState.value = NetworkResponse.Success(RequestState.SENT)
+
+        }catch (e:Exception)
+        {
+            _requestState.value = NetworkResponse.Error(e.message)
+        }
+
+    } //
+
+
+
+    fun getRequestState(userContact:String) = viewModelScope.launch()
+    {
+
+        /// userContact acts as user Id
+
+        _requestState.value = NetworkResponse.Loading()
+
+        try
+        {
+
+            val request = firebaseFirestore
+                ?.collection(Constants.REQUESTS_COLLECTION)
+                ?.document(firebaseAuth?.currentUser?.phoneNumber!!)
+                ?.collection(Constants.RECEIVED_COLLECTION)
+                ?.document(userContact)?.get()?.await()
+
+            if(request!!.exists())
+            {
+                _requestState.value = NetworkResponse.Success(RequestState.RECEIVED)
+            }else
+            {
+                _requestState.value = NetworkResponse.Success(RequestState.SEND)
+            }
+
+
+        }catch (e:Exception)
+        {
+            _requestState.value = NetworkResponse.Error(e.message)
+        }
+
+
+    } // getRequestState closedd
+
+
+
     // for sharedCommunication Between Fragments
-    lateinit var sharedUser: User
+    var sharedUser: User?=null
 
 
 

@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 
 import com.example.familyLocationTracker.databinding.LayoutUserItemBinding
-import com.example.familyLocationTracker.models.User
+import com.example.familyLocationTracker.models.user.User
 
 
 class UserAdapter( private val onClicked: (User) -> Unit) :

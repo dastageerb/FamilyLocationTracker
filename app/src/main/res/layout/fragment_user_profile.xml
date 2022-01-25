@@ -1,14 +1,125 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".views.userProfile.UserProfileFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".views.userProfile.UserProfileFragment"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    >
 
-    <!-- TODO: Update blank fragment layout -->
+    <androidx.cardview.widget.CardView
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        app:cardUseCompatPadding="true"
+        app:cardCornerRadius="150dp"
+        >
+        <ImageView
+            android:id="@+id/fragmentUserProfileUserProfileImageView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_baseline_profile_24"
+            android:scaleType="centerCrop"
+            />
+    </androidx.cardview.widget.CardView>
+
+
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:id="@+id/fragmentUserProfileUserNameTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/user_name"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_marginTop="8dp"
+        />
 
-</FrameLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/fragmentUserProfileSendRequestButton"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:text="@string/send_request"
+        android:background="@drawable/button_bg"
+        android:textColor="@color/white"
+        android:textAllCaps="false"
+        android:layout_marginTop="36dp"
+        />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/fragmentUserProfileReceivedRequestLayout"
+        android:orientation="vertical"
+        android:visibility="gone"
+        android:layout_marginTop="36dp"
+        >
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/fragmentUserProfileAcceptRequestButton"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:text="@string/accept_request"
+            android:background="@drawable/button_bg"
+            android:textColor="@color/white"
+            android:textAllCaps="false"
+            android:layout_marginTop="36dp"
+            />
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/fragmentUserProfileDeclineRequestButton"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:text="@string/decline_request"
+            android:textColor="@color/black"
+            android:textAllCaps="false"
+            android:layout_marginTop="8dp"
+            />
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/fragmentUserProfileSentRequestLayout"
+        android:orientation="vertical"
+        android:visibility="gone"
+        android:layout_marginTop="36dp"
+        >
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/fragmentUserProfileRequestSentButton"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:text="@string/request_sent"
+            android:enabled="false"
+            android:background="@drawable/button_bg"
+            android:textColor="@color/white"
+            android:textAllCaps="false"
+            />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/fragmentUserProfileCancelRequestButton"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:text="@string/decline_request"
+            android:textColor="@color/white"
+            android:background="@drawable/button_bg"
+            android:textAllCaps="false"
+            android:layout_marginTop="8dp"
+            />
+    </LinearLayout>
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:indeterminateTint="@color/purple_200"
+        android:id="@+id/fragmentUserProfileProgressBar"
+        android:visibility="gone"
+        />
+
+</LinearLayout>

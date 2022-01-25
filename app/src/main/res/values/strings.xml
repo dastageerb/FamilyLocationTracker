@@ -28,6 +28,10 @@
     <string name="user_profile">User Profile</string>
     <string name="search">Search</string>
     <string name="people_you_may_know">People You May Know</string>
+    <string name="send_request">Send Request</string>
+    <string name="accept_request">Accept Request</string>
+    <string name="decline_request">Decline Request</string>
+    <string name="request_sent">Request Sent</string>
 
 
 </resources>

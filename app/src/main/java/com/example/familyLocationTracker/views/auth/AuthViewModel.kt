@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.familyLocationTracker.models.VerificationEntity
+import com.example.familyLocationTracker.models.auth.VerificationEntity
 import com.example.familyLocationTracker.util.Constants
 import com.example.familyLocationTracker.util.NetworkResponse
 import com.google.firebase.FirebaseException

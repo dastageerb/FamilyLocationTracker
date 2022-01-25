@@ -8,7 +8,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.familyLocationTracker.R
 import com.example.familyLocationTracker.views.auth.AuthViewModel
-import com.example.familyLocationTracker.models.VerificationEntity
+import com.example.familyLocationTracker.models.auth.VerificationEntity
 import com.example.familyLocationTracker.base.BaseFragment
 import com.example.familyLocationTracker.databinding.FragmentRegisterForOtpBinding
 import com.example.familyLocationTracker.util.NetworkResponse

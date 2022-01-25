@@ -5,15 +5,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.familyLocationTracker.models.User
-import com.example.familyLocationTracker.models.UserLocation
+import com.example.familyLocationTracker.models.user.User
+import com.example.familyLocationTracker.models.user.UserLocation
 import com.example.familyLocationTracker.util.Constants
 import com.example.familyLocationTracker.util.Constants.TAG
 import com.example.familyLocationTracker.util.NetworkResponse
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.tasks.OnCompleteListener
-import com.google.android.gms.tasks.OnFailureListener
-import com.google.android.gms.tasks.OnSuccessListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
@@ -22,7 +20,6 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import timber.log.Timber
 import java.lang.Exception
-import java.util.Calendar.getInstance
 
 class SetupProfileViewModel:ViewModel()
 {
