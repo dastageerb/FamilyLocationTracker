@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".views.userProfile.UserProfileFragment"
+    tools:context=".views.otherUserProfile.UserProfileFragment"
     android:orientation="vertical"
     android:gravity="center_horizontal"
     >
@@ -45,6 +45,17 @@
         android:textColor="@color/white"
         android:textAllCaps="false"
         android:layout_marginTop="36dp"
+        />
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/fragmentUserProfileFriendsButton"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:text="@string/you_are_friends"
+        android:background="@drawable/button_bg"
+        android:textColor="@color/white"
+        android:textAllCaps="false"
+        android:layout_marginTop="36dp"
+        android:visibility="gone"
         />
 
     <LinearLayout
@@ -105,7 +116,7 @@
             android:id="@+id/fragmentUserProfileCancelRequestButton"
             android:layout_width="200dp"
             android:layout_height="50dp"
-            android:text="@string/decline_request"
+            android:text="@string/cancel_request"
             android:textColor="@color/white"
             android:background="@drawable/button_bg"
             android:textAllCaps="false"

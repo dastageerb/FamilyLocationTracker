@@ -1,4 +1,4 @@
-package com.example.familyLocationTracker.views.userProfile
+package com.example.familyLocationTracker.views.otherUserProfile
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,19 +9,19 @@ import coil.load
 import com.example.familyLocationTracker.R
 import com.example.familyLocationTracker.base.BaseFragment
 import com.example.familyLocationTracker.databinding.FragmentUserProfileBinding
+import com.example.familyLocationTracker.models.user.User
+import com.example.familyLocationTracker.models.user.UserLocation
 import com.example.familyLocationTracker.util.NetworkResponse
 import com.example.familyLocationTracker.util.RequestState
 import com.example.familyLocationTracker.util.extensionFunctions.ContextExtension.showToast
 import com.example.familyLocationTracker.util.extensionFunctions.ExtensionFunctions.hide
 import com.example.familyLocationTracker.util.extensionFunctions.ExtensionFunctions.show
-import com.example.familyLocationTracker.views.MainViewModel
 
 
 class UserProfileFragment : BaseFragment<FragmentUserProfileBinding>() , View.OnClickListener
 {
 
-    val mainViewModel:MainViewModel by activityViewModels()
-
+    val userProfileViewModel:UserProfileViewModel by activityViewModels()
     override fun createView(inflater: LayoutInflater, container: ViewGroup?, root: Boolean): FragmentUserProfileBinding
     {
         return FragmentUserProfileBinding.inflate(inflater,container,false)
@@ -32,17 +32,19 @@ class UserProfileFragment : BaseFragment<FragmentUserProfileBinding>() , View.On
         super.onViewCreated(view, savedInstanceState)
 
         initViews()
+
+
     } // onViewCreated closed
 
 
     private fun initViews()
     {
-        mainViewModel.sharedUser.let()
+        userProfileViewModel.sharedUser.let()
         {
-            binding.fragmentUserProfileUserNameTextView.text = mainViewModel.sharedUser!!.userName
+            binding.fragmentUserProfileUserNameTextView.text = userProfileViewModel.sharedUser!!.userName
             binding.fragmentUserProfileUserProfileImageView.load(it?.userImageUrl)
-            controlVisibilityOfViews(false,false,false)
-            mainViewModel.getRequestState(it?.userContact!!)
+            controlVisibilityOfViews(false,false,false,false)
+            userProfileViewModel.getRequestState(it?.userContact!!)
         }
 
         binding.fragmentUserProfileSendRequestButton.setOnClickListener(this)
@@ -50,7 +52,8 @@ class UserProfileFragment : BaseFragment<FragmentUserProfileBinding>() , View.On
         binding.fragmentUserProfileDeclineRequestButton.setOnClickListener(this)
         binding.fragmentUserProfileCancelRequestButton.setOnClickListener(this)
 
-        mainViewModel.requestState.observe(viewLifecycleOwner)
+
+        userProfileViewModel.requestState.observe(viewLifecycleOwner)
         {
             when(it)
             {
@@ -78,9 +81,11 @@ class UserProfileFragment : BaseFragment<FragmentUserProfileBinding>() , View.On
     {
         when(data)
         {
-            RequestState.SEND -> controlVisibilityOfViews(true, sent = false, received = false)
-            RequestState.SENT ->controlVisibilityOfViews(false, sent = true, received = false)
-            RequestState.RECEIVED -> controlVisibilityOfViews(false, sent = false, received = true)
+            RequestState.SEND -> controlVisibilityOfViews(true, sent = false, received = false,false)
+            RequestState.SENT ->controlVisibilityOfViews(false, sent = true, received = false,false)
+            RequestState.RECEIVED -> controlVisibilityOfViews(false, sent = false, received = true,false)
+            RequestState.FRIENDS -> controlVisibilityOfViews(false,false,false,true)
+            else -> {}
         }
 
 
@@ -92,28 +97,37 @@ class UserProfileFragment : BaseFragment<FragmentUserProfileBinding>() , View.On
         {
             R.id.fragmentUserProfileSendRequestButton ->
             {
-                mainViewModel.sharedUser?.let()
+                userProfileViewModel.sharedUser?.let()
                 {
-                    mainViewModel.sendRequest(it.userContact!!)
+                    userProfileViewModel.sendRequest(it.userContact!!)
                 }
-            }
+            } // sendRequest closed
             R.id.fragmentUserProfileAcceptRequestButton ->
             {
-
-            }
+                userProfileViewModel.sharedUser?.let()
+                {
+                    userProfileViewModel.acceptFriendRequest(it)
+                }
+            } // acceptRequest closed
             R.id.fragmentUserProfileDeclineRequestButton ->
             {
-
-            }
+                userProfileViewModel.sharedUser?.let()
+                {
+                    userProfileViewModel.cancelOrDeclineFriendRequest(it.userContact!!)
+                }
+            } // decline Request closed
             R.id.fragmentUserProfileCancelRequestButton ->
             {
-
-            }
+                userProfileViewModel.sharedUser?.let()
+                {
+                    userProfileViewModel.cancelOrDeclineFriendRequest(it.userContact!!)
+                }
+            }  // cancelRequest closed
         } // when closed
     } // onClick closed
 
 
-    private fun controlVisibilityOfViews(send:Boolean,sent:Boolean,received:Boolean)
+    private fun controlVisibilityOfViews(send:Boolean,sent:Boolean,received:Boolean,friend:Boolean)
     {
         if(send)
         {
@@ -140,6 +154,13 @@ class UserProfileFragment : BaseFragment<FragmentUserProfileBinding>() , View.On
             binding.fragmentUserProfileSentRequestLayout.hide()
         }
 
+        if(friend)
+        {
+            binding.fragmentUserProfileFriendsButton.show()
+        }else
+        {
+            binding.fragmentUserProfileFriendsButton.hide()
+        }
 
     } // controlVisibility
 

@@ -1,15 +1,14 @@
-package com.example.familyLocationTracker.views.setupProfile
+package com.example.familyLocationTracker.views.profile
 
+import android.app.Application
 import android.net.Uri
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.example.familyLocationTracker.models.user.User
 import com.example.familyLocationTracker.models.user.UserLocation
 import com.example.familyLocationTracker.util.Constants
 import com.example.familyLocationTracker.util.Constants.TAG
 import com.example.familyLocationTracker.util.NetworkResponse
+import com.example.familyLocationTracker.util.prefs.SharedPrefsHelper
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
@@ -21,8 +20,15 @@ import kotlinx.coroutines.tasks.await
 import timber.log.Timber
 import java.lang.Exception
 
-class SetupProfileViewModel:ViewModel()
+class SetupProfileViewModel(application: Application):AndroidViewModel(application)
 {
+
+
+    private var sharedPrefsHelper: SharedPrefsHelper?=null
+    init
+    {
+        sharedPrefsHelper = SharedPrefsHelper(application.applicationContext)
+    }
 
 
     private val _userUploadResponse:MutableLiveData<NetworkResponse<String>> = MutableLiveData()
@@ -51,6 +57,7 @@ class SetupProfileViewModel:ViewModel()
                {
                    if(it.isSuccessful)
                    {
+                        saveUser(user)
                        _userUploadResponse.value = NetworkResponse.Success("User Uploaded SuccessFully")
                    }else
                    {
@@ -77,13 +84,17 @@ class SetupProfileViewModel:ViewModel()
 //                .addOnFailureListener(OnFailureListener { e -> callBack.onImageUpdateFailure(e.message) })
 //        })
 
-
-
-
-
-
     } // uploadUser closed
 
+
+
+    // saved Prefs
+
+    fun getUser() = sharedPrefsHelper?.getUser()
+
+    fun saveUser(user: User) = sharedPrefsHelper?.saveUser(user)
+
+    fun deleteUser() = sharedPrefsHelper?.clearUser()
 
 
 

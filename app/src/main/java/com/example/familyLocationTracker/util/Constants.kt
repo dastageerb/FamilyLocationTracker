@@ -12,7 +12,7 @@ object Constants
     const val REQUESTS_COLLECTION = "REQUESTS"
     const val SENT_COLLECTION = "SENT REQUESTS"
     const val RECEIVED_COLLECTION = "RECEIVED REQUESTS"
-
+    const val FRIENDS_COLLECTION = "FRIENDS"
 
     // FireStore StorageReference
     const val PROFILE_IMAGES = "PROFILES"
@@ -23,6 +23,9 @@ object Constants
     const val USER_CONTACT = "userContact"
 
 
+    /// Prefs
+    const val Shared_PREFS = "LOCAL_PREFS"
+    const val USER_PREFS = "USER_PREFS"
 
 
 

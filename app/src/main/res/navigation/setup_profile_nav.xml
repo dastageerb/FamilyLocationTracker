@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/setupProfileFragment"
-        android:name="com.example.familyLocationTracker.views.setupProfile.SetupProfileFragment"
+        android:name="com.example.familyLocationTracker.views.profile.SetupProfileFragment"
         android:label="fragment_setup_profile"
         tools:layout="@layout/fragment_setup_profile" />
 </navigation>

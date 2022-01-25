@@ -1,13 +1,13 @@
 package com.example.familyLocationTracker.views.auth
 
 import android.app.Activity
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import android.app.Application
+import androidx.lifecycle.*
 import com.example.familyLocationTracker.models.auth.VerificationEntity
+import com.example.familyLocationTracker.models.user.User
 import com.example.familyLocationTracker.util.Constants
 import com.example.familyLocationTracker.util.NetworkResponse
+import com.example.familyLocationTracker.util.prefs.SharedPrefsHelper
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.*
 import com.google.firebase.firestore.FirebaseFirestore
@@ -15,15 +15,17 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import java.util.concurrent.TimeUnit
 
-class AuthViewModel : ViewModel()
+class AuthViewModel(application: Application) : AndroidViewModel(application)
 {
 
     private var firebaseAuth: FirebaseAuth?=null
     private var firebaseFireStore:FirebaseFirestore?=null
+    private var sharedPrefsHelper:SharedPrefsHelper?=null
     init
     {
         firebaseAuth = FirebaseAuth.getInstance()
         firebaseFireStore = FirebaseFirestore.getInstance()
+        sharedPrefsHelper = SharedPrefsHelper(application.applicationContext)
     }
 
     /**   Sending Otp  */
@@ -81,6 +83,7 @@ class AuthViewModel : ViewModel()
                     ?.document(firebaseAuth?.currentUser?.phoneNumber!!)?.get()?.await()
                 if(user!!.exists())
                 {
+                    saveUser(user.toObject(User::class.java)!!)
                     _userVerificationResponse.value = NetworkResponse.Success(true)
                 }else
                 {
@@ -105,6 +108,16 @@ class AuthViewModel : ViewModel()
     {
         shareData.value =verificationEntity
     }
+
+
+    // SharedPrefs
+
+
+    fun getUser() = sharedPrefsHelper?.getUser()
+
+    fun saveUser(user: User) = sharedPrefsHelper?.saveUser(user)
+
+    fun deleteUser() = sharedPrefsHelper?.clearUser()
 
 
 } /// AuthViewModel

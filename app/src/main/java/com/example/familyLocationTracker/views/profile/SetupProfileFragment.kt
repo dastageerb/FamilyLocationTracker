@@ -1,8 +1,7 @@
-package com.example.familyLocationTracker.views.setupProfile
+package com.example.familyLocationTracker.views.profile
 
 import android.Manifest
 import android.content.pm.PackageManager
-import android.location.Location
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater

@@ -1,14 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".views.ownProfile.OwnProfileFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".views.profile.OwnProfileFragment"
+    >
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ImageView
+        android:id="@+id/fragmentOwnProfileUserProfileImageView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="250dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_baseline_profile_24" />
 
-</FrameLayout>
+
+    <TextView
+        android:id="@+id/fragmentOwnProfileUserNameTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/user_name"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_below="@id/fragmentOwnProfileUserProfileImageView"
+        />
+    <TextView
+        android:id="@+id/fragmentOwnProfileUserContactTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/contact"
+        android:textSize="20sp"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_below="@id/fragmentOwnProfileUserNameTextView"
+        />
+
+    <TextView
+        android:id="@+id/fragmentOwnProfileUserCityTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/city"
+        android:textSize="20sp"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_below="@id/fragmentOwnProfileUserContactTextView"
+        />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/button_bg"
+        android:text="@string/logout"
+        android:textColor="@color/white"
+        android:layout_marginBottom="16dp"
+        android:id="@+id/fragmentOwnProfileLogoutButton"
+        />
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/fragmentOwnProfileLogoutButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="16dp"
+        android:indeterminateTint="@color/purple_200"
+        android:visibility="gone"
+        />
+
+
+
+</RelativeLayout>

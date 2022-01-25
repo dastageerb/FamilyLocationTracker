@@ -86,7 +86,7 @@ class OtpVerificationFragment : BaseFragment<FragmentOtpVerificationBinding>() ,
                         findNavController().setGraph(R.navigation.base_app_nav)
                     }else
                     {
-                        findNavController().setGraph(R.navigation.requirement_setup_nav)
+                        findNavController().setGraph(R.navigation.setup_profile_nav)
                     }
 
                 } // success closed
