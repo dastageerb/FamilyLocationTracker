@@ -9,21 +9,20 @@ import coil.load
 import com.example.familyLocationTracker.R
 import com.example.familyLocationTracker.base.BaseFragment
 import com.example.familyLocationTracker.databinding.FragmentUserProfileBinding
-import com.example.familyLocationTracker.models.user.User
-import com.example.familyLocationTracker.models.user.UserLocation
 import com.example.familyLocationTracker.util.Constants.TAG
 import com.example.familyLocationTracker.util.NetworkResponse
 import com.example.familyLocationTracker.util.RequestState
 import com.example.familyLocationTracker.util.extensionFunctions.ContextExtension.showToast
 import com.example.familyLocationTracker.util.extensionFunctions.ExtensionFunctions.hide
 import com.example.familyLocationTracker.util.extensionFunctions.ExtensionFunctions.show
+import com.example.familyLocationTracker.views.viewModels.HandleRequestsViewModel
 import timber.log.Timber
 
 
 class UserProfileFragment : BaseFragment<FragmentUserProfileBinding>() , View.OnClickListener
 {
 
-    val userProfileViewModel:UserProfileViewModel by activityViewModels()
+    val handleRequestsViewModel: HandleRequestsViewModel by activityViewModels()
     override fun createView(inflater: LayoutInflater, container: ViewGroup?, root: Boolean): FragmentUserProfileBinding
     {
         return FragmentUserProfileBinding.inflate(inflater,container,false)
@@ -41,12 +40,12 @@ class UserProfileFragment : BaseFragment<FragmentUserProfileBinding>() , View.On
 
     private fun initViews()
     {
-        userProfileViewModel.sharedUser.let()
+        handleRequestsViewModel.sharedUser.let()
         {
-            binding.fragmentUserProfileUserNameTextView.text = userProfileViewModel.sharedUser!!.userName
+            binding.fragmentUserProfileUserNameTextView.text = handleRequestsViewModel.sharedUser!!.userName
             binding.fragmentUserProfileUserProfileImageView.load(it?.userImageUrl)
             controlVisibilityOfViews(false,false,false,false)
-            userProfileViewModel.getRequestState(it?.userContact!!)
+            handleRequestsViewModel.getRequestState(it?.userContact!!)
         }
 
         binding.fragmentUserProfileSendRequestButton.setOnClickListener(this)
@@ -55,7 +54,7 @@ class UserProfileFragment : BaseFragment<FragmentUserProfileBinding>() , View.On
         binding.fragmentUserProfileCancelRequestButton.setOnClickListener(this)
 
 
-        userProfileViewModel.requestState.observe(viewLifecycleOwner)
+        handleRequestsViewModel.requestState.observe(viewLifecycleOwner)
         {
             when(it)
             {
@@ -99,31 +98,31 @@ class UserProfileFragment : BaseFragment<FragmentUserProfileBinding>() , View.On
         {
             R.id.fragmentUserProfileSendRequestButton ->
             {
-                userProfileViewModel.sharedUser?.let()
+                handleRequestsViewModel.sharedUser?.let()
                 {
-                    userProfileViewModel.sendRequest(it.userContact!!)
+                    handleRequestsViewModel.sendRequest(it)
                 }
             } // sendRequest closed
             R.id.fragmentUserProfileAcceptRequestButton ->
             {
-                userProfileViewModel.sharedUser?.let()
+                handleRequestsViewModel.sharedUser?.let()
                 {
                     Timber.tag(TAG).d(""+it)
-                    userProfileViewModel.acceptFriendRequest(it)
+                    handleRequestsViewModel.acceptFriendRequest(it)
                 }
             } // acceptRequest closed
             R.id.fragmentUserProfileDeclineRequestButton ->
             {
-                userProfileViewModel.sharedUser?.let()
+                handleRequestsViewModel.sharedUser?.let()
                 {
-                    userProfileViewModel.cancelOrDeclineFriendRequest(it.userContact!!)
+                    handleRequestsViewModel.cancelOrDeclineFriendRequest(it.userContact!!)
                 }
             } // decline Request closed
             R.id.fragmentUserProfileCancelRequestButton ->
             {
-                userProfileViewModel.sharedUser?.let()
+                handleRequestsViewModel.sharedUser?.let()
                 {
-                    userProfileViewModel.cancelOrDeclineFriendRequest(it.userContact!!)
+                    handleRequestsViewModel.cancelOrDeclineFriendRequest(it.userContact!!)
                 }
             }  // cancelRequest closed
         } // when closed

@@ -1,4 +1,4 @@
-package com.example.familyLocationTracker.views.otherUserProfile
+package com.example.familyLocationTracker.views.viewModels
 
 import android.app.Application
 import androidx.lifecycle.*
@@ -18,7 +18,7 @@ import kotlinx.coroutines.tasks.await
 import timber.log.Timber
 import java.lang.Exception
 
-class UserProfileViewModel(application: Application):AndroidViewModel(application)
+class HandleRequestsViewModel(application: Application):AndroidViewModel(application)
 {
 
     private var firebaseFirestore: FirebaseFirestore?=null
@@ -41,7 +41,7 @@ class UserProfileViewModel(application: Application):AndroidViewModel(applicatio
 
 
 
-    fun sendRequest(userContact: String) = viewModelScope.launch()
+    fun sendRequest(user: User) = viewModelScope.launch()
     {
 
         /// userContact acts as user Id
@@ -56,16 +56,16 @@ class UserProfileViewModel(application: Application):AndroidViewModel(applicatio
                     ?.collection(Constants.USER_COLLECTION)
                     ?.document(firebaseAuth?.currentUser?.phoneNumber!!)
                     ?.collection(Constants.SENT_COLLECTION)
-                    ?.document(userContact)
-                    ?.set(Request("sent"))
+                    ?.document(user.userContact!!)
+                    ?.set(user)
                     ?.await()
 
             // in user received collection
             firebaseFirestore
                 ?.collection(Constants.USER_COLLECTION)
-                ?.document(userContact)
+                ?.document(user.userContact!!)
                 ?.collection(Constants.RECEIVED_COLLECTION)
-                ?.document(firebaseAuth?.currentUser?.phoneNumber!!)?.set(Request("received"))
+                ?.document(firebaseAuth?.currentUser?.phoneNumber!!)?.set(getUser()!!)
                 ?.await()
 
 
@@ -91,18 +91,16 @@ class UserProfileViewModel(application: Application):AndroidViewModel(applicatio
             firebaseFirestore
                 ?.collection(Constants.USER_COLLECTION)
                 ?.document(firebaseAuth?.currentUser?.phoneNumber!!)
-                ?.collection(Constants.SENT_COLLECTION)
+                ?.collection(RECEIVED_COLLECTION)
                 ?.document(userContact)
                 ?.delete()?.await()
 
-            // in user received collection
+
             firebaseFirestore
                 ?.collection(Constants.USER_COLLECTION)
                 ?.document(userContact)
-                ?.collection(Constants.RECEIVED_COLLECTION)
-                ?.document(firebaseAuth?.currentUser?.phoneNumber!!)
-                ?.delete()
-                ?.await()
+                ?.collection(SENT_COLLECTION)
+                ?.document(firebaseAuth?.currentUser?.phoneNumber!!)?.delete()?.await()
 
 
             _requestState.value = NetworkResponse.Success(RequestState.SEND)

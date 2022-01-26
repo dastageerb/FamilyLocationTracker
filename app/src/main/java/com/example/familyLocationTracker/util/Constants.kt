@@ -9,7 +9,6 @@ object Constants
 
     // FireStore Collection
     const val USER_COLLECTION = "USERS"
-    const val REQUESTS_COLLECTION = "REQUESTS"
     const val SENT_COLLECTION = "SENT REQUESTS"
     const val RECEIVED_COLLECTION = "RECEIVED REQUESTS"
     const val FRIENDS_COLLECTION = "FRIENDS"

@@ -18,16 +18,16 @@ import com.example.familyLocationTracker.util.NetworkResponse
 import com.example.familyLocationTracker.util.extensionFunctions.ContextExtension.showToast
 import com.example.familyLocationTracker.util.extensionFunctions.ExtensionFunctions.hide
 import com.example.familyLocationTracker.util.extensionFunctions.ExtensionFunctions.show
-import com.example.familyLocationTracker.views.MainViewModel
-import com.example.familyLocationTracker.views.otherUserProfile.UserProfileViewModel
+import com.example.familyLocationTracker.views.viewModels.MainViewModel
+import com.example.familyLocationTracker.views.viewModels.HandleRequestsViewModel
 
 
 class SearchUsersFragment : BaseFragment<FragmentSearchUsersBinding>()
 {
 
 
-    val mainViewModel:MainViewModel by activityViewModels()
-    val userProfileViewModel: UserProfileViewModel by activityViewModels()
+    val mainViewModel: MainViewModel by activityViewModels()
+    val handleRequestsViewModel: HandleRequestsViewModel by activityViewModels()
     lateinit var adapter :UserAdapter
 
 
@@ -82,7 +82,7 @@ class SearchUsersFragment : BaseFragment<FragmentSearchUsersBinding>()
     {
         adapter = UserAdapter()
         {
-            userProfileViewModel.sharedUser = it
+            handleRequestsViewModel.sharedUser = it
             findNavController().navigate(R.id.action_searchUsersFragment_to_userProfileFragment)
         }
         recycler.layoutManager = LinearLayoutManager(requireContext())

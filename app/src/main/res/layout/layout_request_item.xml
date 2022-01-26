@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="150dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="8dp"
+    app:cardUseCompatPadding="true"
+    app:cardElevation="8dp"
+    >
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            app:cardCornerRadius="40dp"
+            android:layout_marginStart="8dp"
+            android:layout_centerVertical="true"
+            android:id="@+id/layoutRequestItemUserImageCarView"
+            >
+            <ImageView
+                android:id="@+id/layoutRequestItemUserProfileImageView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_baseline_profile_24"
+                android:scaleType="centerCrop"
+                />
+        </com.google.android.material.card.MaterialCardView>
+
+
+        <TextView
+            android:id="@+id/layoutRequestItemUserNameTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/user_name"
+            android:layout_toEndOf="@id/layoutRequestItemUserImageCarView"
+            android:layout_marginTop="16dp"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:layout_marginStart="8dp"
+            />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/layoutRequestItemAcceptButton"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_below="@id/layoutRequestItemUserNameTextView"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="24dp"
+            android:layout_toEndOf="@id/layoutRequestItemUserImageCarView"
+            android:background="@drawable/small_button_bg"
+            android:text="@string/accept"
+            android:textAllCaps="false"
+            android:textColor="@color/white" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/layoutRequestItemDeclineButton"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:background="@drawable/small_button_bg"
+            android:backgroundTint="@color/colorLightGrey"
+            android:layout_marginStart="8dp"
+            android:text="@string/decline"
+            android:textColor="@color/black"
+            android:textAllCaps="false"
+            android:layout_below="@id/layoutRequestItemUserNameTextView"
+            android:layout_toEndOf="@id/layoutRequestItemAcceptButton"
+            android:layout_marginTop="24dp"
+            />
+
+
+    </RelativeLayout>
+
+</com.google.android.material.card.MaterialCardView>

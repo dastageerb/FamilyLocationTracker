@@ -1,21 +1,16 @@
-package com.example.familyLocationTracker.views
+package com.example.familyLocationTracker.views.viewModels
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.familyLocationTracker.models.request.Request
 import com.example.familyLocationTracker.models.user.User
 import com.example.familyLocationTracker.util.Constants
-import com.example.familyLocationTracker.util.Constants.TAG
 import com.example.familyLocationTracker.util.NetworkResponse
-import com.example.familyLocationTracker.util.RequestState
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
-import timber.log.Timber
 import java.lang.Exception
 
 class MainViewModel:ViewModel()
@@ -169,6 +164,42 @@ class MainViewModel:ViewModel()
             firebaseFirestore?.collection(Constants.USER_COLLECTION)
                 ?.document(firebaseAuth?.currentUser?.phoneNumber!!)
                 ?.collection(Constants.FRIENDS_COLLECTION)
+                ?.get()
+                ?.addOnCompleteListener()
+                {
+                        task ->
+                    if(task.isSuccessful)
+                    {
+                        val list = mutableListOf<User>()
+                        task.result.forEach()
+                        {
+                            list.add(it.toObject(User::class.java))
+                        }
+                        _getUsersResponse.value = NetworkResponse.Success(list)
+                    }else
+                    {
+                        _getUsersResponse.value = NetworkResponse.Error(task.exception?.message)
+                    } // else closed
+                } // addOnCompleteLister closed
+
+        }catch (e:Exception)
+        {
+            _getUsersResponse.value = NetworkResponse.Error(e.message)
+        }
+    } // getAllUsers closed
+
+
+
+
+    fun getAllRequests()  = viewModelScope.launch()
+    {
+        _getUsersResponse.value = NetworkResponse.Loading()
+
+        try
+        {
+            firebaseFirestore?.collection(Constants.USER_COLLECTION)
+                ?.document(firebaseAuth?.currentUser?.phoneNumber!!)
+                ?.collection(Constants.RECEIVED_COLLECTION)
                 ?.get()
                 ?.addOnCompleteListener()
                 {

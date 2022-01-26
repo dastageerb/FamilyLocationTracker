@@ -37,6 +37,8 @@
     <string name="logout">Logout</string>
     <string name="you_are_friends">You Are Friends</string>
     <string name="friends_and_family">Friends And Family</string>
+    <string name="accept">Accept</string>
+    <string name="decline">Decline</string>
 
 
 </resources>

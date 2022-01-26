@@ -2,7 +2,6 @@ package com.example.familyLocationTracker.views.home
 
 import android.os.Bundle
 import android.view.*
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -11,14 +10,14 @@ import com.example.familyLocationTracker.R
 import com.example.familyLocationTracker.adapters.UserAdapter
 import com.example.familyLocationTracker.base.BaseFragment
 import com.example.familyLocationTracker.databinding.FragmentHomeBinding
+import com.example.familyLocationTracker.util.Constants
 import com.example.familyLocationTracker.util.NetworkResponse
 import com.example.familyLocationTracker.util.extensionFunctions.ContextExtension.showToast
 import com.example.familyLocationTracker.util.extensionFunctions.ExtensionFunctions.hide
 import com.example.familyLocationTracker.util.extensionFunctions.ExtensionFunctions.show
-import com.example.familyLocationTracker.views.MainViewModel
-import com.example.familyLocationTracker.views.otherUserProfile.UserProfileViewModel
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.ktx.Firebase
+import com.example.familyLocationTracker.views.viewModels.MainViewModel
+import com.example.familyLocationTracker.views.viewModels.HandleRequestsViewModel
+import timber.log.Timber
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>()
 {
@@ -26,7 +25,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>()
 
 
     val mainViewModel: MainViewModel by activityViewModels()
-    val userProfileViewModel: UserProfileViewModel by activityViewModels()
+    val handleRequestsViewModel: HandleRequestsViewModel by activityViewModels()
     lateinit var adapter : UserAdapter
 
 
@@ -67,6 +66,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>()
                 is NetworkResponse.Success ->
                 {
                     binding.fragmentHomeProgressBar.hide()
+                    Timber.tag(Constants.TAG).d(""+it.data.toString())
                     it.data.let()
                     {
                         adapter.submitList(it)
@@ -82,7 +82,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>()
     {
         adapter = UserAdapter()
         {
-            userProfileViewModel.sharedUser = it
+            handleRequestsViewModel.sharedUser = it
             findNavController().navigate(R.id.action_searchUsersFragment_to_userProfileFragment)
         }
         recycler.layoutManager = LinearLayoutManager(requireContext())
