@@ -36,76 +36,129 @@ class MainViewModel:ViewModel()
     private val _getUsersResponse :MutableLiveData<NetworkResponse<List<User>>> = MutableLiveData();
     val getUsersResponse :LiveData<NetworkResponse<List<User>>> = _getUsersResponse
 
-    fun getAllUsers()  = viewModelScope.launch()
+//    fun getAllUsers()  = viewModelScope.launch()
+//    {
+//        _getUsersResponse.value = NetworkResponse.Loading()
+//
+//        try
+//        {
+//
+//
+////            val allUsers = firebaseFirestore?.collection(Constants.USER_COLLECTION)
+////                ?.whereNotEqualTo("userContact",firebaseAuth?.currentUser?.phoneNumber)
+////                ?.get()?.await()
+////
+////            allUsers?.forEach()
+////            {
+////                Log.d(TAG, "All "+it.toObject(User::class.java))
+////            }
+////
+////
+////
+////            val friends =  firebaseFirestore?.collection(Constants.USER_COLLECTION)
+////                ?.document(firebaseAuth?.currentUser?.phoneNumber!!)
+////                ?.collection(Constants.FRIENDS_COLLECTION)
+////                ?.get()?.await()
+////
+////
+////            friends?.forEach()
+////            {
+////
+////                Log.d(TAG, "Friends: "+it.toObject(User::class.java))
+////            }
+////
+////            val list = mutableListOf<User>()
+////
+////            friends?.intersect(allUsers!!)?.forEach()
+////            {
+////                list.add(it.toObject(User::class.java))
+////
+////                Log.d(TAG, "Intersect: "+it.toObject(User::class.java))
+////
+////            }
+////            _getUsersResponse.value = NetworkResponse.Success(list)
+//
+//
+////
+//            firebaseFirestore?.collection(Constants.USER_COLLECTION)
+//                ?.whereNotEqualTo("userContact",firebaseAuth?.currentUser?.phoneNumber)
+//                ?.get()
+//                ?.addOnCompleteListener()
+//                {
+//                    task ->
+//                    if(task.isSuccessful)
+//                    {
+//                        val list = mutableListOf<User>()
+//                        task.result.forEach()
+//                        {
+//                            list.add(it.toObject(User::class.java))
+//                        }
+//                        _getUsersResponse.value = NetworkResponse.Success(list)
+//                    }else
+//                    {
+//                        _getUsersResponse.value = NetworkResponse.Error(task.exception?.message)
+//                    } // else closed
+//                } // addOnCompleteLister closed
+//
+//        }catch (e:Exception)
+//        {
+//            _getUsersResponse.value = NetworkResponse.Error(e.message)
+//        }
+//    } // getAllUsers closed
+
+
+
+    fun getAllUsersOtherThanFriends()  = viewModelScope.launch()
     {
         _getUsersResponse.value = NetworkResponse.Loading()
 
         try
         {
 
-
-//            val allUsers = firebaseFirestore?.collection(Constants.USER_COLLECTION)
-//                ?.whereNotEqualTo("userContact",firebaseAuth?.currentUser?.phoneNumber)
-//                ?.get()?.await()
-//
-//            allUsers?.forEach()
-//            {
-//                Log.d(TAG, "All "+it.toObject(User::class.java))
-//            }
-//
-//
-//
-//            val friends =  firebaseFirestore?.collection(Constants.USER_COLLECTION)
-//                ?.document(firebaseAuth?.currentUser?.phoneNumber!!)
-//                ?.collection(Constants.FRIENDS_COLLECTION)
-//                ?.get()?.await()
-//
-//
-//            friends?.forEach()
-//            {
-//
-//                Log.d(TAG, "Friends: "+it.toObject(User::class.java))
-//            }
-//
-//            val list = mutableListOf<User>()
-//
-//            friends?.intersect(allUsers!!)?.forEach()
-//            {
-//                list.add(it.toObject(User::class.java))
-//
-//                Log.d(TAG, "Intersect: "+it.toObject(User::class.java))
-//
-//            }
-//            _getUsersResponse.value = NetworkResponse.Success(list)
+            val peopleYouMayKnow = mutableListOf<User>()
+            val userList = mutableListOf<User>()
+            val friendsList = mutableListOf<User>()
 
 
-//
-            firebaseFirestore?.collection(Constants.USER_COLLECTION)
+            // fetch All Users
+            val allUsers = firebaseFirestore?.collection(Constants.USER_COLLECTION)
                 ?.whereNotEqualTo("userContact",firebaseAuth?.currentUser?.phoneNumber)
-                ?.get()
-                ?.addOnCompleteListener()
-                {
-                    task ->
-                    if(task.isSuccessful)
-                    {
-                        val list = mutableListOf<User>()
-                        task.result.forEach()
-                        {
-                            list.add(it.toObject(User::class.java))
-                        }
-                        _getUsersResponse.value = NetworkResponse.Success(list)
-                    }else
-                    {
-                        _getUsersResponse.value = NetworkResponse.Error(task.exception?.message)
-                    } // else closed
-                } // addOnCompleteLister closed
+                ?.get()?.await()
+
+            // fetch friends
+            val friends =  firebaseFirestore?.collection(Constants.USER_COLLECTION)
+                ?.document(firebaseAuth?.currentUser?.phoneNumber!!)
+                ?.collection(Constants.FRIENDS_COLLECTION)
+                ?.get()?.await()
+
+
+            // add all users to list
+            allUsers?.forEach()
+            {
+                userList.add(it.toObject(User::class.java))
+            }
+
+            // add all friends in a list
+            friends?.forEach()
+            {
+                friendsList.add(it.toObject(User::class.java))
+            }
+
+            // get the difference and add it to peopleYouMayKnow List
+            peopleYouMayKnow.addAll(userList.minus(friendsList))
+
+
+
+            _getUsersResponse.value = NetworkResponse.Success(peopleYouMayKnow)
+
+
+
 
         }catch (e:Exception)
         {
             _getUsersResponse.value = NetworkResponse.Error(e.message)
         }
     } // getAllUsers closed
-
 
     fun getFriends()  = viewModelScope.launch()
     {

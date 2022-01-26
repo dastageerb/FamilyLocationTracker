@@ -5,6 +5,9 @@ import androidx.lifecycle.*
 import com.example.familyLocationTracker.models.request.Request
 import com.example.familyLocationTracker.models.user.User
 import com.example.familyLocationTracker.util.Constants
+import com.example.familyLocationTracker.util.Constants.RECEIVED_COLLECTION
+import com.example.familyLocationTracker.util.Constants.SENT_COLLECTION
+import com.example.familyLocationTracker.util.Constants.TAG
 import com.example.familyLocationTracker.util.NetworkResponse
 import com.example.familyLocationTracker.util.RequestState
 import com.example.familyLocationTracker.util.prefs.SharedPrefsHelper
@@ -12,6 +15,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
+import timber.log.Timber
 import java.lang.Exception
 
 class UserProfileViewModel(application: Application):AndroidViewModel(application)
@@ -101,7 +105,6 @@ class UserProfileViewModel(application: Application):AndroidViewModel(applicatio
                 ?.await()
 
 
-
             _requestState.value = NetworkResponse.Success(RequestState.SEND)
         }catch (e: Exception)
         {
@@ -118,22 +121,19 @@ class UserProfileViewModel(application: Application):AndroidViewModel(applicatio
         try
         {
 
-            // in my sent collection
-            firebaseFirestore
-                ?.collection(Constants.USER_COLLECTION)
-                ?.document(firebaseAuth?.currentUser?.phoneNumber!!)
-                ?.collection(Constants.SENT_COLLECTION)
-                ?.document(user.userContact!!)
-                ?.delete()?.await()
+        firebaseFirestore
+            ?.collection(Constants.USER_COLLECTION)
+            ?.document(firebaseAuth?.currentUser?.phoneNumber!!)
+            ?.collection(RECEIVED_COLLECTION)
+            ?.document(user.userContact!!)
+            ?.delete()?.await()
 
-            // in user received collection
+
             firebaseFirestore
                 ?.collection(Constants.USER_COLLECTION)
                 ?.document(user.userContact!!)
-                ?.collection(Constants.RECEIVED_COLLECTION)
-                ?.document(firebaseAuth?.currentUser?.phoneNumber!!)
-                ?.delete()
-                ?.await()
+                ?.collection(SENT_COLLECTION)
+                ?.document(firebaseAuth?.currentUser?.phoneNumber!!)?.delete()?.await()
 
 
            // val myFriends =
@@ -147,7 +147,7 @@ class UserProfileViewModel(application: Application):AndroidViewModel(applicatio
                 ?.collection(Constants.USER_COLLECTION)
                 ?.document(user.userContact!!)
                 ?.collection(Constants.FRIENDS_COLLECTION)
-                ?.document(firebaseAuth?.currentUser?.phoneNumber!!)?.set(user)?.await()
+                ?.document(firebaseAuth?.currentUser?.phoneNumber!!)?.set(getUser()!!)?.await()
 
 
             _requestState.value = NetworkResponse.Success(RequestState.FRIENDS)

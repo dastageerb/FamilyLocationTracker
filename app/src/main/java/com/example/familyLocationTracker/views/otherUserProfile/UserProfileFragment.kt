@@ -11,11 +11,13 @@ import com.example.familyLocationTracker.base.BaseFragment
 import com.example.familyLocationTracker.databinding.FragmentUserProfileBinding
 import com.example.familyLocationTracker.models.user.User
 import com.example.familyLocationTracker.models.user.UserLocation
+import com.example.familyLocationTracker.util.Constants.TAG
 import com.example.familyLocationTracker.util.NetworkResponse
 import com.example.familyLocationTracker.util.RequestState
 import com.example.familyLocationTracker.util.extensionFunctions.ContextExtension.showToast
 import com.example.familyLocationTracker.util.extensionFunctions.ExtensionFunctions.hide
 import com.example.familyLocationTracker.util.extensionFunctions.ExtensionFunctions.show
+import timber.log.Timber
 
 
 class UserProfileFragment : BaseFragment<FragmentUserProfileBinding>() , View.OnClickListener
@@ -106,6 +108,7 @@ class UserProfileFragment : BaseFragment<FragmentUserProfileBinding>() , View.On
             {
                 userProfileViewModel.sharedUser?.let()
                 {
+                    Timber.tag(TAG).d(""+it)
                     userProfileViewModel.acceptFriendRequest(it)
                 }
             } // acceptRequest closed

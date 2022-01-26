@@ -47,7 +47,7 @@ class SearchUsersFragment : BaseFragment<FragmentSearchUsersBinding>()
 
     private fun initViews()
     {
-        mainViewModel.getAllUsers()
+        mainViewModel.getAllUsersOtherThanFriends()
 
         mainViewModel.getUsersResponse.observe(viewLifecycleOwner)
         {

@@ -51,6 +51,7 @@ class OwnProfileFragment : BaseFragment<FragmentOwnProfileBinding>() , View.OnCl
         {
             R.id.fragmentOwnProfileLogoutButton ->
             {
+                viewModel.deleteUser()
                 FirebaseAuth.getInstance().signOut()
                 findNavController().setGraph(R.navigation.auth_nav)
             }
