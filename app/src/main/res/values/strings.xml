@@ -43,6 +43,12 @@
     <string name="allow">Allow</string>
     <string name="location_permissions">Location Permissions</string>
     <string name="proceed">Proceed</string>
+    <string name="unfriend">Unfriend</string>
+    <string name="message">Message</string>
+    <string name="call">Call</string>
+    <string name="friend">Friend"'"s Profile</string>
+    <string name="my_profile">My Profile</string>
+    <string name="track_current_location">Track Current Location</string>
 
 
 </resources>

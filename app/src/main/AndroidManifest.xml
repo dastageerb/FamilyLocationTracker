@@ -48,6 +48,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <service android:name=".views.home.CurrentLocationUpdaterService"
+            android:foregroundServiceType="location" />
+
+
+
     </application>
 
 </manifest>

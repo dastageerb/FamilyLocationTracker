@@ -49,8 +49,6 @@ class HandleRequestsViewModel(application: Application):AndroidViewModel(applica
         _requestState.value = NetworkResponse.Loading()
         try
         {
-
-
                 // in my sent collection
                 firebaseFirestore
                     ?.collection(Constants.USER_COLLECTION)

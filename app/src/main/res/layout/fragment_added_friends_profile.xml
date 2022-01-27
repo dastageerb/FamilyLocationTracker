@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".views.addedFriendsProfile.AddedFriendsProfileFragment"
+    >
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/fragmentAddedFriendProfileCardView"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignParentStart="true"
+        android:layout_margin="16dp"
+        app:cardCornerRadius="50dp"
+        >
+        <ImageView
+            android:id="@+id/fragmentAddedFriendsProfileProfileImageView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_baseline_profile_24"
+            android:scaleType="centerCrop"
+            />
+    </com.google.android.material.card.MaterialCardView>
+
+
+    <TextView
+        android:id="@+id/fragmentAddedFriendUserNameTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_toEndOf="@+id/fragmentAddedFriendProfileCardView"
+        android:text="@string/user_name"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/fragmentAddedFriendsProfileCallButton"
+        android:layout_width="140dp"
+        android:layout_height="40dp"
+        android:layout_below="@id/fragmentAddedFriendProfileCardView"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/small_button_bg"
+        android:drawableStart="@drawable/ic_baseline_call_24"
+        android:drawablePadding="-16dp"
+        android:drawableTint="@color/white"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:text="@string/call"
+        android:textAllCaps="false"
+        android:textColor="@color/white" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/fragmentAddedFriendsProfileTextMessageButton"
+        android:layout_width="140dp"
+        android:layout_height="40dp"
+        android:layout_below="@id/fragmentAddedFriendProfileCardView"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:layout_toEndOf="@id/fragmentAddedFriendsProfileCallButton"
+        android:background="@drawable/small_button_bg"
+        android:drawableStart="@drawable/ic_baseline_textsms_24"
+        android:drawablePadding="-16dp"
+        android:drawableTint="@color/white"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:text="@string/message"
+        android:textAllCaps="false"
+        android:textColor="@color/white" />
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/fragmentAddedFriendsProfileUnFriendButton"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@id/fragmentAddedFriendsProfileCallButton"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/button_bg"
+        android:backgroundTint="@color/colorLightGrey"
+        android:text="@string/unfriend"
+        android:textAllCaps="false"
+        android:textColor="@color/white" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/fragmentAddedFriendsProfileTrackButton"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@id/fragmentAddedFriendsProfileUnFriendButton"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/button_bg"
+        android:text="@string/track_current_location"
+        android:textAllCaps="false"
+        android:textColor="@color/white" />
+
+
+
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="16dp"
+            android:indeterminateTint="@color/purple_200"
+            android:id="@+id/fragmentAddedFriendProfileProgressBar"
+            />
+
+</RelativeLayout>

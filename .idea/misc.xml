@@ -10,7 +10,8 @@
         <entry key="app/src/main/res/drawable/ic_baseline_person_pin_24.xml" value="0.1890625" />
         <entry key="app/src/main/res/drawable/small_button_bg.xml" value="0.121875" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1125" />
-        <entry key="app/src/main/res/layout/fragment_family_map.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_added_friends_profile.xml" value="0.25914634146341464" />
+        <entry key="app/src/main/res/layout/fragment_family_map.xml" value="0.16753536857781087" />
         <entry key="app/src/main/res/layout/fragment_friend_requests.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.11448834853090173" />
         <entry key="app/src/main/res/layout/fragment_otp_verification.xml" value="0.16" />
@@ -27,6 +28,7 @@
         <entry key="app/src/main/res/menu/bottom_navigation_menu.xml" value="0.23541666666666666" />
         <entry key="app/src/main/res/menu/fragment_home_menu.xml" value="0.19814814814814816" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/family.xml" value="0.13333333333333333" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/family_image.xml" value="0.13333333333333333" />
       </map>
     </option>
   </component>

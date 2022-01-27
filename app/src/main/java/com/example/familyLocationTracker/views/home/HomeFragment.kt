@@ -53,7 +53,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>()
         {
             when(it)
             {
-
                 is NetworkResponse.Loading ->
                 {
                     binding.fragmentHomeProgressBar.show()
@@ -71,11 +70,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>()
                     {
                         adapter.submitList(it)
                     }
-                }
+                } //
             } // when closed
         } // observer closed
-
-
     } // initViews closed
 
     private fun setupRecycler(recycler: RecyclerView)
@@ -83,7 +80,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>()
         adapter = UserAdapter()
         {
             handleRequestsViewModel.sharedUser = it
-            findNavController().navigate(R.id.action_searchUsersFragment_to_userProfileFragment)
+           findNavController().navigate(R.id.action_homeFragment_to_addedFriendsProfileFragment)
         }
         recycler.layoutManager = LinearLayoutManager(requireContext())
         recycler.adapter = adapter

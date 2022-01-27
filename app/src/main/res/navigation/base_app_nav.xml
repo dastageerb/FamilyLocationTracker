@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_homeFragment_to_searchUsersFragment"
             app:destination="@id/searchUsersFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_addedFriendsProfileFragment"
+            app:destination="@id/addedFriendsProfileFragment" />
     </fragment>
     <fragment
         android:id="@+id/familyMapFragment"
@@ -41,6 +44,19 @@
     <fragment
         android:id="@+id/ownProfileFragment"
         android:name="com.example.familyLocationTracker.views.profile.OwnProfileFragment"
-        android:label="fragment_own_profile"
+        android:label="@string/my_profile"
         tools:layout="@layout/fragment_own_profile" />
+    <fragment
+        android:id="@+id/addedFriendsProfileFragment"
+        android:name="com.example.familyLocationTracker.views.addedFriendsProfile.AddedFriendsProfileFragment"
+        android:label="@string/friend"
+        tools:layout="@layout/fragment_added_friends_profile" >
+        <action
+            android:id="@+id/action_addedFriendsProfileFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/base_app_nav"
+            app:popUpToInclusive="true"
+            app:launchSingleTop="true"
+            />
+    </fragment>
 </navigation>

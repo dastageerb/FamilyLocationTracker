@@ -22,7 +22,8 @@ import timber.log.Timber
 class UserProfileFragment : BaseFragment<FragmentUserProfileBinding>() , View.OnClickListener
 {
 
-    val handleRequestsViewModel: HandleRequestsViewModel by activityViewModels()
+    private val handleRequestsViewModel: HandleRequestsViewModel by activityViewModels()
+
     override fun createView(inflater: LayoutInflater, container: ViewGroup?, root: Boolean): FragmentUserProfileBinding
     {
         return FragmentUserProfileBinding.inflate(inflater,container,false)
