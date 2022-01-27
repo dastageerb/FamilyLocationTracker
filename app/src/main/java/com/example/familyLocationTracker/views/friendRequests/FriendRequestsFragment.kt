@@ -94,13 +94,13 @@ class FriendRequestsFragment : BaseFragment<FragmentFriendRequestsBinding>()
                 handleRequest(false,it)
             })
 
-
         recycler.layoutManager = LinearLayoutManager(requireContext())
         recycler.adapter = adapter
 
-
     } // setupRecyclerView closed
 
+
+    // accept or delete the request and fetch the updated requests list
 
     private fun handleRequest(accept: Boolean, user: User) = lifecycleScope.launch()
     {

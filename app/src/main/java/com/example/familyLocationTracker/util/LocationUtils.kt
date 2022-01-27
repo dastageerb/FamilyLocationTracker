@@ -6,6 +6,7 @@ import android.location.Geocoder
 import android.location.Location
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.tasks.Task
 import kotlinx.coroutines.tasks.await
 import java.lang.Exception
 import java.util.*
@@ -15,11 +16,10 @@ object LocationUtils
 
 
     @SuppressLint("MissingPermission")
-    suspend fun Context.getCurrentLocation(): Location
+    suspend fun Context.getCurrentLocation(): Task<Location>
     {
-        val fusedLocationProviderClient = LocationServices
-            .getFusedLocationProviderClient(this)
-        return fusedLocationProviderClient.lastLocation.await()
+        val fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
+        return fusedLocationProviderClient.lastLocation
     } // getCurrentLocation
 
 

@@ -36,6 +36,7 @@ class AuthViewModel(application: Application) : AndroidViewModel(application)
     fun sendFirebaseOtp(number:String,activity: Activity) = viewModelScope.launch()
     {
 
+
         _userOtpResponse.value = NetworkResponse.Loading()
 
         val callback = object :  PhoneAuthProvider.OnVerificationStateChangedCallbacks()

@@ -37,6 +37,7 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.LatLng
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
 import timber.log.Timber
 
 
@@ -46,6 +47,7 @@ class SetupProfileFragment : BaseFragment<FragmentSetupProfileBinding>() , View.
 
     lateinit var googleMap: GoogleMap
     lateinit var currentLocationLatLng:LatLng
+
     lateinit var imageUri:Uri
 
     val viewModel:SetupProfileViewModel by viewModels()
@@ -207,7 +209,7 @@ class SetupProfileFragment : BaseFragment<FragmentSetupProfileBinding>() , View.
             {
                 lifecycleScope.launch()
                 {
-                    val currentLocation = requireContext().getCurrentLocation()
+                    val currentLocation = requireContext().getCurrentLocation().await()
                      currentLocationLatLng = LatLng(currentLocation.latitude,currentLocation.longitude)
                     googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLocationLatLng, 14.0f))
                     val city = requireContext().getLocalityFromLatLng(currentLocationLatLng)
