@@ -3,6 +3,7 @@ package com.example.familyLocationTracker.views.map
 import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,6 +20,7 @@ import com.example.familyLocationTracker.adapters.UsersOnMap
 import com.example.familyLocationTracker.base.BaseFragment
 import com.example.familyLocationTracker.databinding.FragmentFamilyMapBinding
 import com.example.familyLocationTracker.models.user.User
+import com.example.familyLocationTracker.util.Constants.TAG
 import com.example.familyLocationTracker.util.LocationUtils.getCurrentLocation
 import com.example.familyLocationTracker.util.NetworkResponse
 import com.example.familyLocationTracker.util.extensionFunctions.ContextExtension.gpsEnabled
@@ -39,9 +41,7 @@ import kotlinx.coroutines.tasks.await
 
 import com.google.android.gms.maps.model.MapStyleOptions
 import com.google.android.gms.maps.model.MarkerOptions
-
-
-
+import timber.log.Timber
 
 
 class FamilyMapFragment : BaseFragment<FragmentFamilyMapBinding>() ,OnMapReadyCallback
@@ -128,12 +128,14 @@ class FamilyMapFragment : BaseFragment<FragmentFamilyMapBinding>() ,OnMapReadyCa
         {
             val userLocation = it.userLocation
 
+            Timber.tag(TAG).d(""+it)
+
+
             val options = MarkerOptions()
                 .position(LatLng(userLocation?.latitude!!,userLocation?.longitude!!))
                 .title(it.userName)
-               // .snippet(snips)
-            googleMap //Google googleMap object for map reference
-                .addMarker(options)?.tag = it.userContact
+            googleMap.addMarker(options)?.tag = it.userContact
+
         } // userList forEach closed
     } // addMarkerToTheMaps
 

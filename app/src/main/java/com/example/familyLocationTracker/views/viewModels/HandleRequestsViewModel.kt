@@ -220,8 +220,8 @@ class HandleRequestsViewModel(application: Application):AndroidViewModel(applica
 
 
 
-    // for sharedCommunication Between Fragments
-    var sharedUser: User?=null
+        // for sharedCommunication Between Fragments
+        var sharedUser: User?=null
 
 
     // sharedPrefs

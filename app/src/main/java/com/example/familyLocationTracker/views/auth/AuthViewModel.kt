@@ -6,13 +6,17 @@ import androidx.lifecycle.*
 import com.example.familyLocationTracker.models.auth.VerificationEntity
 import com.example.familyLocationTracker.models.user.User
 import com.example.familyLocationTracker.util.Constants
+import com.example.familyLocationTracker.util.Constants.TAG
 import com.example.familyLocationTracker.util.NetworkResponse
 import com.example.familyLocationTracker.util.prefs.SharedPrefsHelper
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.*
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.messaging.FirebaseMessaging
+import com.google.firebase.messaging.FirebaseMessagingService
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
+import timber.log.Timber
 import java.util.concurrent.TimeUnit
 
 class AuthViewModel(application: Application) : AndroidViewModel(application)
@@ -84,8 +88,18 @@ class AuthViewModel(application: Application) : AndroidViewModel(application)
                     ?.document(firebaseAuth?.currentUser?.phoneNumber!!)?.get()?.await()
                 if(user!!.exists())
                 {
+                    val token = FirebaseMessaging.getInstance().token.await()
+
+                    firebaseFireStore
+                        ?.collection(Constants.USER_COLLECTION)
+                        ?.document(firebaseAuth?.currentUser?.phoneNumber!!)
+                        ?.update("fcmToken",token)?.await()
+
+                        Timber.tag(TAG).d("token"+token)
+                        user.toObject(User::class.java)?.fcmToken = token
                     saveUser(user.toObject(User::class.java)!!)
                     _userVerificationResponse.value = NetworkResponse.Success(true)
+
                 }else
                 {
                     _userVerificationResponse.value = NetworkResponse.Success(false)

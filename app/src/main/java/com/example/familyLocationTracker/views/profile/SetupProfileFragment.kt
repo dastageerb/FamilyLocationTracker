@@ -209,16 +209,22 @@ class SetupProfileFragment : BaseFragment<FragmentSetupProfileBinding>() , View.
             {
                 lifecycleScope.launch()
                 {
-                    val currentLocation = requireContext().getCurrentLocation().await()
-                     currentLocationLatLng = LatLng(currentLocation.latitude,currentLocation.longitude)
-                    googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLocationLatLng, 14.0f))
-                    val city = requireContext().getLocalityFromLatLng(currentLocationLatLng)
 
-                    binding.fragmentSetupProfileAddressTextView.text = city
-                    Timber.tag(Constants.TAG).d("$city")
+                    try
+                    {
+                        val currentLocation = requireContext().getCurrentLocation().await()
+                        currentLocationLatLng = LatLng(currentLocation.latitude,currentLocation.longitude)
+                        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLocationLatLng, 14.0f))
+                        val city = requireContext().getLocalityFromLatLng(currentLocationLatLng)
+                        binding.fragmentSetupProfileAddressTextView.text = city
+                        Timber.tag(Constants.TAG).d("$city")
+                        binding.fragmentSetupProfileLocationLayout.show()
+                        binding.fragmentSetupProfileSetupProfileButton.enable()
 
-                    binding.fragmentSetupProfileLocationLayout.show()
-                    binding.fragmentSetupProfileSetupProfileButton.enable()
+                    }catch (e:Exception)
+                    {
+                        getUserCurrentLocation()
+                    }
 
                 } // lifecycleScope closed
             }else

@@ -7,6 +7,9 @@ object Constants
     const val APP_PACKAGE_NAME =  "com.example.familyLocationTracker"
 
 
+    const val POST_URL = "https://fcm.googleapis.com/"
+    const val FIREBASE_SERVER_KEY = "AAAADN1M44E:APA91bGgahrTncHEDBgCB2S3808-GuCGghO-Kp5vQcQQBSr5j6QpDOfBOxGxM-3vLbaToBauyTf3hXkKjp_vfYbdVEmixBxA5rzABXV0ltGRfnprj0Af4vX55OreZx9jTRK6vXnw2LK6"
+
     // FireStore Collection
     const val USER_COLLECTION = "USERS"
     const val SENT_COLLECTION = "SENT REQUESTS"

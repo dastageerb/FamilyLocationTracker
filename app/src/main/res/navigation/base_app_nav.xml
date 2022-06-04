@@ -58,5 +58,13 @@
             app:popUpToInclusive="true"
             app:launchSingleTop="true"
             />
+        <action
+            android:id="@+id/action_addedFriendsProfileFragment_to_userTrackingFragment"
+            app:destination="@id/userTrackingFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/userTrackingFragment"
+        android:name="com.example.familyLocationTracker.views.userTrackingFragment.UserTrackingFragment"
+        android:label="fragment_user_tracking"
+        tools:layout="@layout/fragment_user_tracking" />
 </navigation>

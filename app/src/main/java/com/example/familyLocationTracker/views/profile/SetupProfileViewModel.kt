@@ -11,10 +11,13 @@ import com.example.familyLocationTracker.util.NetworkResponse
 import com.example.familyLocationTracker.util.prefs.SharedPrefsHelper
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.messaging.FirebaseMessaging
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
+import com.google.type.Date
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import timber.log.Timber
@@ -49,7 +52,9 @@ class SetupProfileViewModel(application: Application):AndroidViewModel(applicati
             imageRef.putFile(imageUri).await()
            val imageUrl = imageRef.downloadUrl.await()
 
-           val user = User(name,contact,city,imageUrl.toString(), UserLocation(currentLocation.latitude,currentLocation.longitude))
+           val token = FirebaseMessaging.getInstance().token.await()
+
+           val user = User(name,contact,city,imageUrl.toString(), UserLocation(currentLocation.latitude,currentLocation.longitude),token)
 
 
            firebaseFirestore.collection(Constants.USER_COLLECTION)

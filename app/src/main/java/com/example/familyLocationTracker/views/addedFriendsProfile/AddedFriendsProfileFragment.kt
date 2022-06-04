@@ -16,6 +16,7 @@ import com.example.familyLocationTracker.util.NetworkResponse
 import com.example.familyLocationTracker.util.extensionFunctions.ContextExtension.showToast
 import com.example.familyLocationTracker.util.extensionFunctions.ExtensionFunctions.hide
 import com.example.familyLocationTracker.util.extensionFunctions.ExtensionFunctions.show
+import com.example.familyLocationTracker.views.userTrackingFragment.UserTrackingViewModel
 import com.example.familyLocationTracker.views.viewModels.HandleRequestsViewModel
 
 
@@ -23,6 +24,7 @@ class AddedFriendsProfileFragment : BaseFragment<FragmentAddedFriendsProfileBind
 {
 
 
+    val userTrackingViewModel: UserTrackingViewModel by activityViewModels()
     private val handleRequestsViewModel: HandleRequestsViewModel by activityViewModels()
 
     override fun createView(inflater: LayoutInflater, container: ViewGroup?, root: Boolean): FragmentAddedFriendsProfileBinding
@@ -45,6 +47,7 @@ class AddedFriendsProfileFragment : BaseFragment<FragmentAddedFriendsProfileBind
         {
             binding.fragmentAddedFriendUserNameTextView.text = handleRequestsViewModel.sharedUser!!.userName
             binding.fragmentAddedFriendsProfileProfileImageView.load(it?.userImageUrl)
+
         }
 
         binding.fragmentAddedFriendsProfileCallButton.setOnClickListener(this)
@@ -96,7 +99,6 @@ class AddedFriendsProfileFragment : BaseFragment<FragmentAddedFriendsProfileBind
                 smsIntent.data = Uri.parse("sms:" + handleRequestsViewModel.sharedUser?.userContact)
                 startActivity(smsIntent)
             }
-
             R.id.fragmentAddedFriendsProfileUnFriendButton ->
             {
                 handleRequestsViewModel.cancelOrDeclineFriendRequest(handleRequestsViewModel.sharedUser?.userContact!!)
@@ -104,6 +106,11 @@ class AddedFriendsProfileFragment : BaseFragment<FragmentAddedFriendsProfileBind
 
             R.id.fragmentAddedFriendsProfileTrackButton ->
             {
+                handleRequestsViewModel.sharedUser?.let()
+                {
+                    userTrackingViewModel.sharedUser = it
+                    findNavController().navigate(R.id.action_addedFriendsProfileFragment_to_userTrackingFragment)
+                }
 
             }
         } // when closed

@@ -1,6 +1,7 @@
 package com.example.familyLocationTracker.util.extensionFunctions
 
 import android.view.View
+import android.widget.TextView
 
 object ExtensionFunctions
 {
@@ -21,6 +22,15 @@ object ExtensionFunctions
             this.visibility = View.GONE
         }
     }
+
+
+    fun TextView.showAnswer(boolean:Boolean)
+    {
+
+
+
+    }
+
 
 
     fun View.enable()

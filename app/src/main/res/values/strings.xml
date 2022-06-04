@@ -49,6 +49,7 @@
     <string name="friend">Friend"'"s Profile</string>
     <string name="my_profile">My Profile</string>
     <string name="track_current_location">Track Current Location</string>
+    <string name="last_location">Last Location</string>
 
 
 </resources>
